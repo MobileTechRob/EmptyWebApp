@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm1.aspx.cs" Inherits="TestWebApplication.WebForm1" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm2.aspx.cs" Inherits="TestWebApplication.WebForm2" %>
 
 <!DOCTYPE html>
 
@@ -10,7 +10,6 @@
     <form id="form1" runat="server">
         <div>
         </div>
-        <asp:Button ID="btnNExtPage" runat="server" Text ="Next Page" OnClick="btnNExtPage_Click" />
     </form>
 </body>
 </html>
