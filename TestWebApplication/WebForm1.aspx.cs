@@ -18,5 +18,10 @@ namespace TestWebApplication
         {
             Response.Redirect("WebForm2.aspx");
         }
+
+        protected void btnSendInformation_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

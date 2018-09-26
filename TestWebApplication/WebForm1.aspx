@@ -8,9 +8,14 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <div>
-        </div>
+        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+        <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+
+
+        </asp:UpdatePanel>
+        <asp:Button ID="btnSendInformation" runat="server" Text="Send Information" OnClick="btnSendInformation_Click"  />  
         <asp:Button ID="btnNExtPage" runat="server" Text ="Next Page" OnClick="btnNExtPage_Click" />
+               
     </form>
 </body>
 </html>

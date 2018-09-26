@@ -82,6 +82,7 @@
     <Content Include="WebForm2.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Code\EmailSupport.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
