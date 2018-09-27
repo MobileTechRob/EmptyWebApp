@@ -23,5 +23,10 @@ namespace TestWebApplication
         {
 
         }
+
+        protected void txtBoxMsg_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
