@@ -14,7 +14,7 @@ namespace UtilityClasses
             mailClient = new SmtpClient("smtp-mail.outlook.com", 587);            
         }
 
-        public bool SendATextMessage(string fromAddress, string password, string toAddress, string subject, string msg)
+        public bool SendATextMessage(string fromAddress, string password, string toAddress, string subject, string msg,ref string errorTest)
         {
             bool mailSent = false;
 
@@ -29,6 +29,7 @@ namespace UtilityClasses
             }
             catch (Exception ex)
             {
+                errorTest = ex.InnerException.ToString();
                 ex.GetHashCode();
             }
             

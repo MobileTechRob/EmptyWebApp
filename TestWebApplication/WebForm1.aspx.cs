@@ -28,8 +28,12 @@ namespace TestWebApplication
 
             txtBoxMsg.ForeColor = System.Drawing.Color.Black;
 
-            if (emailSupport.SendATextMessage(txtboxFromAddress.Text, txtboxPassword.Text, txtboxCellNumber.Text + "@" + emailDomain, "", txtBoxMsg.Text) == true)
+            string errorText = "";
+
+            if (emailSupport.SendATextMessage(txtboxFromAddress.Text, txtboxPassword.Text, txtboxCellNumber.Text + "@" + emailDomain, "", txtBoxMsg.Text, ref errorText) == true)
                 txtBoxMsg.ForeColor = System.Drawing.Color.Green;
+            else
+                txtBoxMsg.Text = errorText;
         }
 
         protected void txtBoxMsg_TextChanged(object sender, EventArgs e)
