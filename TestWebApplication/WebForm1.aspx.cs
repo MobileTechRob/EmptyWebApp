@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
+using UtilityClasses;
 
 namespace TestWebApplication
 {
@@ -21,10 +17,26 @@ namespace TestWebApplication
 
         protected void btnSendInformation_Click(object sender, EventArgs e)
         {
+            string emailDomain = "";
 
+            UtilityClasses.EmailSupport emailSupport = new EmailSupport();
+
+            if (ddlCarrier.SelectedItem.Text == "ATT")
+                emailDomain = "txt.att.net";
+            else
+                emailDomain = "vtext.com";
+
+            txtBoxMsg.ForeColor = System.Drawing.Color.Black;
+
+            if (emailSupport.SendATextMessage(txtboxFromAddress.Text, txtboxPassword.Text, txtboxCellNumber.Text + "@" + emailDomain, "", txtBoxMsg.Text) == true)
+                txtBoxMsg.ForeColor = System.Drawing.Color.Green;
         }
 
         protected void txtBoxMsg_TextChanged(object sender, EventArgs e)
+        {            
+        }
+
+        protected void txtboxFrom_TextChanged(object sender, EventArgs e)
         {
 
         }

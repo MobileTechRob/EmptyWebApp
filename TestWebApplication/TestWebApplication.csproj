@@ -82,7 +82,6 @@
     <Content Include="WebForm2.aspx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Code\EmailSupport.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -103,8 +102,15 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Code\" />
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\UtilityClasses\UtilityClasses.csproj">
+      <Project>{8c5ad21e-46c0-4954-b875-9448f12fde72}</Project>
+      <Name>UtilityClasses</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
