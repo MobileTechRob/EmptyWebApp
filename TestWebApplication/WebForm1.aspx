@@ -35,7 +35,15 @@
             </ContentTemplate>
         </asp:UpdatePanel>
         <asp:Button ID="btnSendInformation" runat="server" Text="Send Information" OnClick="btnSendInformation_Click"  />  
-        <asp:Button ID="btnNExtPage" runat="server" Text ="Next Page" OnClick="btnNExtPage_Click" />               
-    </form>
+        <asp:Button ID="btnNExtPage" runat="server" Text ="Next Page" OnClick="btnNExtPage_Click" />    
+        <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+            <ContentTemplate>
+                <br/>
+                <asp:Label runat="server" ID="lblPreviousTexts" Text="Previous Texts:"></asp:Label>
+                <br/>
+                <asp:ListBox ID="lstboxPreviousTexts" runat="server"/>                
+            </ContentTemplate>
+        </asp:UpdatePanel>
+      </form>
 </body>
 </html>

@@ -6,12 +6,11 @@ namespace UtilityClasses
     public class EmailSupport
     {
         SmtpClient mailClient;
-        MailMessage mailMessage;
-
+        
         public EmailSupport()
         {
             // smtp-mail.outlook.com. SSL: true-explicit. Port: 587 (default) 
-            mailClient = new SmtpClient("smtp-mail.outlook.com", 587);            
+            mailClient = new SmtpClient("smtp.sendgrid.net");            
         }
 
         public bool SendATextMessage(string fromAddress, string password, string toAddress, string subject, string msg,ref string errorTest)
@@ -19,12 +18,13 @@ namespace UtilityClasses
             bool mailSent = false;
 
             mailClient.UseDefaultCredentials = false;
-            mailClient.Credentials = new System.Net.NetworkCredential(fromAddress, password);
+            mailClient.Credentials = new System.Net.NetworkCredential("azure_cc89b080c78769b72ede1cb801bbde25@azure.com", "herm1234");
+            mailClient.DeliveryMethod = SmtpDeliveryMethod.Network;
             mailClient.EnableSsl = true;
                            
             try
             {
-                mailClient.Send(fromAddress, toAddress, subject, msg);
+                mailClient.Send(fromAddress, toAddress, subject, msg);                
                 mailSent = true;
             }
             catch (Exception ex)
