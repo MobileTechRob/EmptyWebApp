@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Data.SqlClient;
 using UtilityClasses;
 
@@ -31,10 +32,7 @@ namespace TestWebApplication
 
             string errorText = "";
 
-            SqlConnection conn = new SqlConnection("Server = tcp:robsmobilesolutions.database.windows.net,1433; Initial Catalog = TextMessages; Persist Security Info = False; User ID = {rhermann}; Password ={Herm!234}; MultipleActiveResultSets = False; Encrypt = True; TrustServerCertificate = False; Connection Timeout = 30;");
-            conn.OpenAsync();
-
-
+            SqlConnection conn = new SqlConnection("Server = tcp:robsmobilesolutions.database.windows.net,1433; Initial Catalog = TextMessages; Persist Security Info = False; User ID = {rhermann}; Password ={Herm!234}; MultipleActiveResultSets = False; Encrypt = True; TrustServerCertificate = False; Connection Timeout = 30;");            
             SqlCommand sqlCmd = new SqlCommand("", conn);
             
 
@@ -44,6 +42,13 @@ namespace TestWebApplication
                 txtBoxMsg.ForeColor = System.Drawing.Color.Green;
             else
                 txtBoxMsg.Text = errorText;
+        }
+
+        public async Task<SqlConnection> SendText()
+        {
+            SqlConnection conn = new SqlConnection("Server = tcp:robsmobilesolutions.database.windows.net,1433; Initial Catalog = TextMessages; Persist Security Info = False; User ID = {rhermann}; Password ={Herm!234}; MultipleActiveResultSets = False; Encrypt = True; TrustServerCertificate = False; Connection Timeout = 30;");
+            await conn.OpenAsync();
+            return conn;
         }
 
         protected void txtBoxMsg_TextChanged(object sender, EventArgs e)
