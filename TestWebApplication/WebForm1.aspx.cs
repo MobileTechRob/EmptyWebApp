@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.SqlClient;
 using UtilityClasses;
 
 namespace TestWebApplication
@@ -29,6 +30,15 @@ namespace TestWebApplication
             txtBoxMsg.ForeColor = System.Drawing.Color.Black;
 
             string errorText = "";
+
+            SqlConnection conn = new SqlConnection("Server = tcp:robsmobilesolutions.database.windows.net,1433; Initial Catalog = TextMessages; Persist Security Info = False; User ID = {rhermann}; Password ={Herm!234}; MultipleActiveResultSets = False; Encrypt = True; TrustServerCertificate = False; Connection Timeout = 30;");
+            conn.OpenAsync();
+
+
+            SqlCommand sqlCmd = new SqlCommand("", conn);
+            
+
+            //"Server = tcp:robsmobilesolutions.database.windows.net,1433; Initial Catalog = TextMessages; Persist Security Info = False; User ID = { your_username }; Password ={ your_password}; MultipleActiveResultSets = False; Encrypt = True; TrustServerCertificate = False; Connection Timeout = 30;""
 
             if (emailSupport.SendATextMessage(txtboxFromAddress.Text, txtboxPassword.Text, txtboxCellNumber.Text + "@" + emailDomain, "", txtBoxMsg.Text, ref errorText) == true)
                 txtBoxMsg.ForeColor = System.Drawing.Color.Green;
