@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm1.aspx.cs" Inherits="TestWebApplication.WebForm1" %>
+﻿<%@ Page Language="C#" Async="true" AutoEventWireup="true" CodeBehind="WebForm1.aspx.cs" Inherits="TestWebApplication.WebForm1" %>
 
 <!DOCTYPE html>
 
@@ -41,7 +41,7 @@
                 <br/>
                 <asp:Label runat="server" ID="lblPreviousTexts" Text="Previous Texts:"></asp:Label>
                 <br/>
-                <asp:ListBox ID="lstboxPreviousTexts" runat="server"/>                
+                <asp:ListBox ID="lstboxPreviousTexts" runat="server" Width="25%"/>                
             </ContentTemplate>
         </asp:UpdatePanel>
       </form>

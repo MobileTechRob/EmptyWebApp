@@ -9,47 +9,61 @@ namespace TestWebApplication
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
         }
+
 
         protected void btnNExtPage_Click(object sender, EventArgs e)
         {
             Response.Redirect("WebForm2.aspx");
         }
 
-        protected void btnSendInformation_Click(object sender, EventArgs e)
+        protected async void btnSendInformation_Click(object sender, EventArgs e)
         {
             string emailDomain = "";
+            string errorText = "";
 
             UtilityClasses.EmailSupport emailSupport = new EmailSupport();
 
+            Task<SqlConnection> conn = OpenDatabase();
+
             if (ddlCarrier.SelectedItem.Text == "ATT")
-                emailDomain = "txt.att.net";
+              emailDomain = "txt.att.net";
             else
-                emailDomain = "vtext.com";
+              emailDomain = "vtext.com";
 
-            txtBoxMsg.ForeColor = System.Drawing.Color.Black;
+            bool sent = false;
 
-            string errorText = "";
+            sent = emailSupport.SendATextMessage(txtboxFromAddress.Text, txtboxPassword.Text, txtboxCellNumber.Text + "@" + emailDomain, "", txtBoxMsg.Text, ref errorText);
 
-            SqlConnection conn = new SqlConnection("Server = tcp:robsmobilesolutions.database.windows.net,1433; Initial Catalog = TextMessages; Persist Security Info = False; User ID = {rhermann}; Password ={Herm!234}; MultipleActiveResultSets = False; Encrypt = True; TrustServerCertificate = False; Connection Timeout = 30;");            
-            SqlCommand sqlCmd = new SqlCommand("", conn);
-            
-
-            //"Server = tcp:robsmobilesolutions.database.windows.net,1433; Initial Catalog = TextMessages; Persist Security Info = False; User ID = { your_username }; Password ={ your_password}; MultipleActiveResultSets = False; Encrypt = True; TrustServerCertificate = False; Connection Timeout = 30;""
-
-            if (emailSupport.SendATextMessage(txtboxFromAddress.Text, txtboxPassword.Text, txtboxCellNumber.Text + "@" + emailDomain, "", txtBoxMsg.Text, ref errorText) == true)
+            if (sent == true)
                 txtBoxMsg.ForeColor = System.Drawing.Color.Green;
-            else
-                txtBoxMsg.Text = errorText;
+            else                            
+                txtBoxMsg.ForeColor = System.Drawing.Color.Black;
+            
+            SqlConnection connection = await conn;
+
+            string sqlInsert = "INSERT INTO Texts (TextMessage, TextDate) VALUES ('" + txtBoxMsg.Text + "','" + DateTime.Now.ToString() + "')";
+            SqlCommand cmd = new SqlCommand(sqlInsert);
+            cmd.Connection = connection;
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+                lstboxPreviousTexts.Items.Add(txtBoxMsg.Text.Substring(0, Math.Min(txtBoxMsg.Text.Length, 15)));
+            }
+            catch (SqlException sqlEx)
+            {
+               sqlEx.GetHashCode();
+            }
         }
 
-        public async Task<SqlConnection> SendText()
-        {
-            SqlConnection conn = new SqlConnection("Server = tcp:robsmobilesolutions.database.windows.net,1433; Initial Catalog = TextMessages; Persist Security Info = False; User ID = {rhermann}; Password ={Herm!234}; MultipleActiveResultSets = False; Encrypt = True; TrustServerCertificate = False; Connection Timeout = 30;");
+        public async Task<SqlConnection> OpenDatabase()
+        {            
+            SqlConnection conn = new SqlConnection("Server = tcp:robsmobilesolutions.database.windows.net,1433; Initial Catalog = TextMessages; Persist Security Info = False; User ID=rhermann;Password=Herm!234; MultipleActiveResultSets = False; Encrypt = True; TrustServerCertificate = False; Connection Timeout = 30;");
             await conn.OpenAsync();
             return conn;
         }
+
 
         protected void txtBoxMsg_TextChanged(object sender, EventArgs e)
         {            
