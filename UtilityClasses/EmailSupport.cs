@@ -18,7 +18,7 @@ namespace UtilityClasses
             bool mailSent = false;
 
             mailClient.UseDefaultCredentials = false;
-            mailClient.Credentials = new System.Net.NetworkCredential("azure_cc89b080c78769b72ede1cb801bbde25@azure.com", "herm1234");
+            mailClient.Credentials = new System.Net.NetworkCredential();
             mailClient.DeliveryMethod = SmtpDeliveryMethod.Network;
             mailClient.EnableSsl = true;
                            
