@@ -55,11 +55,13 @@ namespace TestWebApplication
             {
                sqlEx.GetHashCode();
             }
+
+            connection.Close();
         }
 
         public async Task<SqlConnection> OpenDatabase()
         {            
-            SqlConnection conn = new SqlConnection("Server = tcp:robsmobilesolutions.database.windows.net,1433; Initial Catalog = TextMessages; Persist Security Info = False; User ID=rhermann;Password=Herm!234; MultipleActiveResultSets = False; Encrypt = True; TrustServerCertificate = False; Connection Timeout = 30;");
+            SqlConnection conn = new SqlConnection("Server = tcp:robsmobilesolutions.database.windows.net,1433; Initial Catalog = TextMessages; Persist Security Info = False; User ID=;Password=; MultipleActiveResultSets = False; Encrypt = True; TrustServerCertificate = False; Connection Timeout = 30;");
             await conn.OpenAsync();
             return conn;
         }
